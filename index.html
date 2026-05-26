@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriTrace — Verified Agrifood Sourcing Intelligence</title>
+  <meta name="description" content="AgriTrace connects verified farm-level production records with commercial demand — giving manufacturers, brokers, and food buyers a traceable link to every commodity they source." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:   #1a3d2b;
+      --green-mid:    #2d6a4f;
+      --green-light:  #40916c;
+      --amber:        #c9913d;
+      --amber-light:  #f0b14a;
+      --off-white:    #f7f5f0;
+      --white:        #ffffff;
+      --gray-light:   #eef0ec;
+      --gray-text:    #5a6a5c;
+      --dark:         #111c14;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 6%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: var(--green-mid);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .nav-logo-icon svg { width: 20px; height: 20px; }
+
+    .nav-brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      background: var(--green-mid);
+      color: var(--white);
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--green-deep); }
+
+    .nav-cta svg { width: 16px; height: 16px; }
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      padding: 140px 6% 100px;
+      background: linear-gradient(160deg, var(--green-deep) 0%, var(--green-mid) 60%, var(--green-light) 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,145,61,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: 10%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(201,145,61,0.2);
+      border: 1px solid var(--amber);
+      color: var(--amber-light);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--amber-light);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--amber-light); }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      color: rgba(255,255,255,0.82);
+      max-width: 580px;
+      margin-bottom: 42px;
+      font-weight: 400;
+    }
+
+    .hero-rings {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ring-tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.9);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* ── SECTION BASE ────────────────────────────── */
+    section { padding: 90px 6%; }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      color: var(--green-deep);
+      max-width: 600px;
+      margin-bottom: 18px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray-text);
+      max-width: 580px;
+      margin-bottom: 56px;
+    }
+
+    /* ── PROBLEM ─────────────────────────────────── */
+    .problem { background: var(--off-white); }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .problem-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    .problem-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: #fdf0e0;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1.4rem;
+    }
+
+    .problem-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 10px;
+    }
+
+    .problem-card p {
+      font-size: 0.9rem;
+      color: var(--gray-text);
+      line-height: 1.65;
+    }
+
+    /* ── HOW IT WORKS ────────────────────────────── */
+    .how { background: var(--white); }
+
+    .rings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .ring-card {
+      border-radius: 16px;
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ring-card.farmer  { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border: 1px solid #a5d6a7; }
+    .ring-card.broker  { background: linear-gradient(135deg, #fff8e1, #ffecb3); border: 1px solid #ffe082; }
+    .ring-card.manu    { background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 1px solid #90caf9; }
+
+    .ring-number {
+      font-size: 4rem;
+      font-weight: 900;
+      opacity: 0.12;
+      position: absolute;
+      top: 10px; right: 20px;
+      line-height: 1;
+      color: var(--green-deep);
+    }
+
+    .ring-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--green-deep);
+      margin-bottom: 14px;
+    }
+
+    .ring-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .ring-card ul li {
+      font-size: 0.9rem;
+      color: #2d4a30;
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .ring-card ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green-mid);
+      font-weight: 700;
+    }
+
+    /* ── VALUE ───────────────────────────────────── */
+    .value { background: var(--green-deep); color: var(--white); }
+
+    .value .section-label { color: var(--amber-light); }
+    .value .section-title { color: var(--white); }
+    .value .section-sub   { color: rgba(255,255,255,0.7); }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .value-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 28px 24px;
+      transition: background 0.2s;
+    }
+
+    .value-card:hover { background: rgba(255,255,255,0.11); }
+
+    .value-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .value-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .value-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+    }
+
+    /* ── GLOBAL ──────────────────────────────────── */
+    .global { background: var(--off-white); }
+
+    .global-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) { .global-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    .global-regions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .region-tag {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .region-tag .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green-light);
+      flex-shrink: 0;
+    }
+
+    /* ── CONTACT ─────────────────────────────────── */
+    .contact { background: var(--white); text-align: center; }
+
+    .contact .section-title,
+    .contact .section-sub { max-width: 540px; margin-left: auto; margin-right: auto; }
+
+    .contact .section-sub { margin-bottom: 40px; }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green-mid);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--green-deep); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--green-mid);
+      border: 2px solid var(--green-mid);
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover { background: var(--green-mid); color: var(--white); }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 32px 6%;
+      font-size: 0.85rem;
+    }
+
+    footer span { color: var(--amber-light); font-weight: 600; }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 600px) {
+      nav { padding: 14px 5%; }
+      .nav-brand { font-size: 1rem; }
+      .hero { padding: 120px 5% 80px; }
+      section { padding: 70px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a9 9 0 0 1 9 9c0 5-9 13-9 13S3 16 3 11a9 9 0 0 1 9-9z"/>
+        <circle cx="12" cy="11" r="3"/>
+      </svg>
+    </div>
+    <span class="nav-brand">AgriTrace</span>
+  </a>
+  <a class="nav-cta" href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+      <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+    </svg>
+    Connect on LinkedIn
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Platform in Development — Accepting Expressions of Interest
+  </div>
+  <h1>Know Exactly <span>Where Your Food</span> Comes From</h1>
+  <p>
+    AgriTrace is a global agrifood sourcing intelligence platform. We connect verified farm-level production records with commercial demand — so manufacturers, brokers, and food buyers can source commodities with confidence, transparency, and full traceability.
+  </p>
+  <div class="hero-rings">
+    <span class="ring-tag">🌾 Farmers — All Scales</span>
+    <span class="ring-tag">🔗 Brokers</span>
+    <span class="ring-tag">🏭 Manufacturers & Buyers</span>
+    <span class="ring-tag">🌍 Worldwide</span>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <p class="section-label">The Problem We Are Solving</p>
+  <h2 class="section-title">Sourcing decisions are still built on trust, not evidence</h2>
+  <p class="section-sub">European food manufacturers and buyers are under increasing pressure to prove where their commodities come from — but the supply chain cannot yet provide that proof.</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon">📄</div>
+      <h3>Unverifiable Paper Records</h3>
+      <p>Sourcing decisions rely on documents and verbal assurances that cannot be independently confirmed at any stage of the supply chain.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🔍</div>
+      <h3>No Farm-Level Visibility</h3>
+      <p>Buyers have no view into how, where, or by whom a commodity was grown — only what an intermediary chooses to report.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">⚖️</div>
+      <h3>Rising Regulatory Pressure</h3>
+      <p>EU Farm to Fork, CSDDD, and the EU Deforestation Regulation all demand traceable, documented sourcing chains that most businesses cannot yet produce.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🚫</div>
+      <h3>Excluded Producers</h3>
+      <p>Farmers of all sizes — without structured records or market access tools — cannot participate in higher-value, verified commercial supply chains.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <p class="section-label">How It Works</p>
+  <h2 class="section-title">Three rings. One verified supply chain.</h2>
+  <p class="section-sub">AgriTrace connects the full supply chain — from the farm to the manufacturer — through a single, auditable, immutable record system.</p>
+  <div class="rings-grid">
+    <div class="ring-card farmer">
+      <div class="ring-number">1</div>
+      <h3>🌾 Farmers — Every Scale</h3>
+      <ul>
+        <li>Register farms and plots with soil and location data</li>
+        <li>Record all inputs: seeds, fertilisers, labour, transport</li>
+        <li>Track crop development and harvest outcomes</li>
+        <li>Log costs, revenue, and profit per farming round</li>
+        <li>Photo records of crop growth stages</li>
+        <li>AI-assisted guidance for pests and crop issues</li>
+      </ul>
+    </div>
+    <div class="ring-card broker">
+      <div class="ring-number">2</div>
+      <h3>🔗 Brokers</h3>
+      <ul>
+        <li>Organise farms into structured farming rounds</li>
+        <li>Aggregate supply from any size of farm operation</li>
+        <li>Match verified supply to manufacturer specifications</li>
+        <li>Manage sourcing commitments with documented evidence</li>
+        <li>Build a track record of supply reliability</li>
+      </ul>
+    </div>
+    <div class="ring-card manu">
+      <div class="ring-number">3</div>
+      <h3>🏭 Manufacturers & Buyers</h3>
+      <ul>
+        <li>Define commodity specifications, quality, and volume</li>
+        <li>Source from verified, documented supply chains</li>
+        <li>Trace commodities to specific farms and plots</li>
+        <li>Access production history, inputs, and yield performance</li>
+        <li>Satisfy regulatory due diligence with auditable records</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE -->
+<section class="value">
+  <p class="section-label">Why AgriTrace</p>
+  <h2 class="section-title">The trust layer the global food system is missing</h2>
+  <p class="section-sub">Our platform creates an immutable, auditable supply-chain memory — built during production, not reconstructed after the fact.</p>
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="icon">🔐</div>
+      <h3>Immutable Records</h3>
+      <p>Production and sourcing records are stored in an event-driven, tamper-proof system. What was recorded cannot be altered retroactively.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">📍</div>
+      <h3>Farm-Level Traceability</h3>
+      <p>Every sourcing decision traces back to a specific farmer, plot, season, and production record — not just a country or region.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">🌍</div>
+      <h3>Global Coverage</h3>
+      <p>Works wherever farms operate. Designed for low-bandwidth, mobile-first environments so no producer is excluded by geography.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">📋</div>
+      <h3>Regulatory Ready</h3>
+      <p>Auditable supply-chain documentation that helps manufacturers meet CSDDD, EUDR, and Farm to Fork traceability requirements.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL -->
+<section class="global">
+  <div class="global-inner">
+    <div>
+      <p class="section-label">Global Reach</p>
+      <h2 class="section-title">European buyers. Global supply.</h2>
+      <p class="section-sub" style="margin-bottom: 0;">
+        AgriTrace is built to connect European manufacturers and traders to verified producers anywhere in the world — the same traceability infrastructure regardless of country, crop, or farm size. One platform. Every market.
+      </p>
+    </div>
+    <div class="global-regions">
+      <div class="region-tag"><span class="dot"></span>Eastern Europe</div>
+      <div class="region-tag"><span class="dot"></span>South America</div>
+      <div class="region-tag"><span class="dot"></span>Southeast Asia</div>
+      <div class="region-tag"><span class="dot"></span>West Africa</div>
+      <div class="region-tag"><span class="dot"></span>North Africa</div>
+      <div class="region-tag"><span class="dot"></span>Central Asia</div>
+      <div class="region-tag"><span class="dot"></span>South Asia</div>
+      <div class="region-tag"><span class="dot"></span>+ Expanding</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <p class="section-label">Get in Touch</p>
+  <h2 class="section-title">Looking for a commercial co-founder</h2>
+  <p class="section-sub">
+    AgriTrace is in active development. I am seeking a business or commercial co-founder with agrifood, commodity trading, procurement, or supply-chain experience to shape the commercial strategy and go-to-market approach.
+  </p>
+  <div class="contact-links">
+    <a class="btn-primary" href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+        <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+      </svg>
+      Connect on LinkedIn
+    </a>
+    <a class="btn-secondary" href="mailto:bensha02019@gmail.com">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,12 2,6"/>
+      </svg>
+      Send an Email
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>AgriTrace</span> &nbsp;·&nbsp; Verified Agrifood Sourcing Intelligence &nbsp;·&nbsp; Platform in Development</p>
+</footer>
+
+</body>
+</html>
