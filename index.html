@@ -1,650 +1,332 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgriTrace — Verified Agrifood Sourcing Intelligence</title>
-  <meta name="description" content="AgriTrace connects verified farm-level production records with commercial demand; giving manufacturers, brokers, and food buyers a traceable link to every commodity they source." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgriTrace | Verified Agrifood Sourcing Intelligence</title>
+  <meta name="description" content="AgriTrace helps agrifood buyers and manufacturers connect farm evidence, custody, processing and commercial records into a buyer-ready chain of evidence.">
+  <meta name="theme-color" content="#163d32">
+  <meta property="og:title" content="AgriTrace | Evidence that follows the lot">
+  <meta property="og:description" content="Buyer-ready agrifood sourcing evidence from origin through processing and delivery.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://agritrace.tech/">
+  <link rel="canonical" href="https://agritrace.tech/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --green-deep:   #1a3d2b;
-      --green-mid:    #2d6a4f;
-      --green-light:  #40916c;
-      --amber:        #c9913d;
-      --amber-light:  #f0b14a;
-      --off-white:    #f7f5f0;
-      --white:        #ffffff;
-      --gray-light:   #eef0ec;
-      --gray-text:    #5a6a5c;
-      --dark:         #111c14;
+      --forest: #163d32;
+      --forest-2: #245948;
+      --green: #3c6b38;
+      --blue: #2e5fa3;
+      --cream: #f6f4ee;
+      --paper: #fffdf8;
+      --ink: #1f2933;
+      --muted: #657169;
+      --gold: #e8c874;
+      --amber: #9c6b15;
+      --line: #dce2da;
+      --white: #fff;
+      --shadow: 0 24px 70px rgba(18, 47, 39, .12);
+      --radius: 18px;
+      --max: 1180px;
     }
 
+    * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: "DM Sans", sans-serif; line-height: 1.65; }
+    a { color: inherit; }
+    img, svg { display: block; }
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .skip { position: absolute; left: -999px; top: 8px; z-index: 999; padding: 10px 16px; background: var(--white); color: var(--forest); }
+    .skip:focus { left: 8px; }
+    .wrap { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .eyebrow { margin: 0 0 14px; color: var(--green); font: 700 .78rem/1.2 "Manrope", sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+    h1, h2, h3 { margin: 0; font-family: "Manrope", sans-serif; line-height: 1.13; letter-spacing: -.035em; }
+    h1 { max-width: 860px; font-size: clamp(2.65rem, 6vw, 5.7rem); }
+    h2 { max-width: 790px; font-size: clamp(2rem, 4vw, 3.55rem); }
+    h3 { font-size: 1.15rem; letter-spacing: -.015em; }
+    p { margin: 0; }
+    .lead { max-width: 740px; color: var(--muted); font-size: clamp(1rem, 2vw, 1.2rem); }
+    .section { padding: 100px 0; }
+    .section-head { display: grid; gap: 20px; margin-bottom: 52px; }
+    .button { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border: 1px solid transparent; border-radius: 999px; text-decoration: none; font-weight: 700; transition: transform .2s, background .2s, border-color .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--gold); color: #263227; }
+    .button-primary:hover { background: #f0d88f; }
+    .button-secondary { border-color: rgba(255,255,255,.34); color: var(--white); }
+    .button-secondary:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+    .button-dark { background: var(--forest); color: var(--white); }
+    .button-outline { border-color: var(--forest); color: var(--forest); }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--dark);
-      line-height: 1.6;
+    header { position: sticky; top: 0; z-index: 50; background: rgba(255,253,248,.93); border-bottom: 1px solid rgba(31,41,51,.08); backdrop-filter: blur(14px); }
+    nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--forest); text-decoration: none; font: 800 1.12rem/1 "Manrope", sans-serif; }
+    .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 11px; background: var(--forest); }
+    .brand-mark svg { width: 22px; color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: #435149; text-decoration: none; font-size: .92rem; font-weight: 600; }
+    .nav-links a:hover { color: var(--forest); }
+    .nav-links .nav-pilot { padding: 10px 17px; border-radius: 999px; background: var(--forest); color: var(--white); }
+
+    .hero { position: relative; overflow: hidden; padding: 110px 0 80px; color: var(--white); background: var(--forest); }
+    .hero::before { content: ""; position: absolute; width: 720px; height: 720px; right: -260px; top: -350px; border: 1px solid rgba(232,200,116,.23); border-radius: 50%; box-shadow: 0 0 0 100px rgba(232,200,116,.04), 0 0 0 200px rgba(232,200,116,.025); }
+    .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(320px, .55fr); gap: 70px; align-items: end; }
+    .hero .eyebrow { color: var(--gold); }
+    .hero h1 span { color: var(--gold); }
+    .hero-copy { margin-top: 28px; max-width: 720px; color: rgba(255,255,255,.76); font-size: 1.15rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .hero-note { padding: 25px; border: 1px solid rgba(255,255,255,.16); border-radius: var(--radius); background: rgba(255,255,255,.07); }
+    .hero-note strong { display: block; margin-bottom: 8px; color: var(--gold); font: 700 .84rem/1.2 "Manrope", sans-serif; letter-spacing: .09em; text-transform: uppercase; }
+    .hero-note p { color: rgba(255,255,255,.78); }
+    .hero-note small { display: block; margin-top: 16px; color: rgba(255,255,255,.55); }
+    .audience { border-bottom: 1px solid var(--line); background: var(--cream); }
+    .audience-row { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .audience-row > span { color: var(--muted); font-size: .86rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .audience-list { display: flex; flex-wrap: wrap; gap: 26px; color: var(--forest); font-weight: 700; }
+
+    .problem-grid, .proof-grid, .roles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .card-number { width: 38px; height: 38px; display: grid; place-items: center; margin-bottom: 42px; border-radius: 50%; background: var(--cream); color: var(--amber); font: 800 .85rem/1 "Manrope", sans-serif; }
+    .card h3 { margin-bottom: 10px; color: var(--forest); }
+    .card p { color: var(--muted); }
+
+    .journey { background: var(--cream); }
+    .journey-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: var(--white); box-shadow: var(--shadow); }
+    .step { min-height: 260px; padding: 30px 24px; border-right: 1px solid var(--line); }
+    .step:last-child { border-right: 0; }
+    .step-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 62px; }
+    .step-index { color: var(--blue); font: 800 .78rem/1 "Manrope", sans-serif; }
+    .step-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 6px rgba(60,107,56,.11); }
+    .step h3 { margin-bottom: 9px; }
+    .step p { color: var(--muted); font-size: .91rem; }
+    .journey-note { display: flex; gap: 14px; align-items: flex-start; max-width: 760px; margin-top: 28px; color: var(--muted); }
+    .journey-note strong { color: var(--forest); }
+
+    .lineage { color: var(--white); background: #102e27; }
+    .lineage-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 70px; align-items: center; }
+    .lineage .eyebrow { color: var(--gold); }
+    .lineage .lead { margin-top: 22px; color: rgba(255,255,255,.68); }
+    .lineage-panel { padding: 32px; border: 1px solid rgba(255,255,255,.13); border-radius: 24px; background: rgba(255,255,255,.05); }
+    .chain { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; }
+    .chain + .chain { margin-top: 14px; }
+    .node { padding: 17px; border-radius: 14px; background: rgba(255,255,255,.09); }
+    .node b { display: block; margin-bottom: 4px; color: var(--gold); }
+    .node span { color: rgba(255,255,255,.66); font-size: .85rem; }
+    .arrow { color: var(--gold); font-size: 1.3rem; }
+    .evidence-boundary { margin-top: 22px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.13); color: rgba(255,255,255,.61); font-size: .88rem; }
+
+    .proof-grid { grid-template-columns: 1.2fr .8fr .8fr; }
+    .proof-card { min-height: 240px; display: flex; flex-direction: column; justify-content: space-between; }
+    .proof-card:first-child { color: var(--white); background: var(--blue); border-color: var(--blue); }
+    .proof-card:first-child h3, .proof-card:first-child p { color: var(--white); }
+    .status { display: inline-flex; align-self: flex-start; padding: 6px 10px; border-radius: 999px; color: var(--forest); background: #e6f1e8; font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+    .proof-card:first-child .status { background: rgba(255,255,255,.15); color: var(--white); }
+    .status.next { color: #714c0d; background: #f8edce; }
+    .proof-card p { margin-top: 14px; }
+
+    .roles { background: var(--cream); }
+    .roles-grid { grid-template-columns: repeat(4, 1fr); }
+    .role-card { min-height: 230px; }
+    .role-icon { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 30px; border-radius: 13px; color: var(--white); background: var(--forest); font: 800 1rem/1 "Manrope", sans-serif; }
+
+    .pilot-box { display: grid; grid-template-columns: 1.15fr .85fr; gap: 50px; padding: 58px; border-radius: 28px; color: var(--white); background: var(--forest); box-shadow: var(--shadow); }
+    .pilot-box .eyebrow { color: var(--gold); }
+    .pilot-box .lead { margin-top: 20px; color: rgba(255,255,255,.7); }
+    .pilot-checks { display: grid; gap: 15px; align-content: center; }
+    .pilot-check { display: flex; gap: 12px; align-items: flex-start; color: rgba(255,255,255,.78); }
+    .check { width: 23px; height: 23px; flex: 0 0 23px; display: grid; place-items: center; border-radius: 50%; color: var(--forest); background: var(--gold); font-weight: 800; }
+    .pilot-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+
+    .boundary { padding: 26px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--cream); }
+    .boundary .wrap { display: flex; gap: 14px; align-items: flex-start; }
+    .boundary strong { color: var(--forest); }
+    .boundary p { color: var(--muted); font-size: .93rem; }
+    footer { padding: 48px 0; color: rgba(255,255,255,.62); background: #0d241e; }
+    .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: end; }
+    footer .brand { color: var(--white); }
+    footer p { max-width: 600px; margin-top: 16px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; justify-content: flex-end; }
+    .footer-links a { color: var(--white); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 940px) {
+      .hero-grid, .lineage-grid, .pilot-box { grid-template-columns: 1fr; }
+      .hero-note { max-width: 560px; }
+      .journey-grid { grid-template-columns: 1fr 1fr; }
+      .step { border-bottom: 1px solid var(--line); }
+      .problem-grid, .proof-grid { grid-template-columns: 1fr 1fr; }
+      .roles-grid { grid-template-columns: 1fr 1fr; }
     }
-
-    /* ── NAV ─────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 6%;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.07);
+    @media (max-width: 700px) {
+      .wrap { width: min(calc(100% - 28px), var(--max)); }
+      .section { padding: 76px 0; }
+      .nav-links a:not(.nav-pilot) { display: none; }
+      .audience-row { padding: 22px 0; align-items: flex-start; flex-direction: column; }
+      .audience-list { gap: 11px 18px; }
+      .problem-grid, .proof-grid, .roles-grid, .journey-grid { grid-template-columns: 1fr; }
+      .step { min-height: 210px; border-right: 0; }
+      .step-top { margin-bottom: 42px; }
+      .pilot-box { padding: 36px 26px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-links { justify-content: flex-start; }
     }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-logo-icon {
-      width: 36px; height: 36px;
-      background: var(--green-mid);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    .nav-logo-icon svg { width: 20px; height: 20px; }
-
-    .nav-brand {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--green-deep);
-      letter-spacing: -0.3px;
-    }
-
-    .nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      background: var(--green-mid);
-      color: var(--white);
-      padding: 9px 20px;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    .nav-cta:hover { background: var(--green-deep); }
-
-    .nav-cta svg { width: 16px; height: 16px; }
-
-    /* ── HERO ────────────────────────────────────── */
-    .hero {
-      padding: 140px 6% 100px;
-      background: linear-gradient(160deg, var(--green-deep) 0%, var(--green-mid) 60%, var(--green-light) 100%);
-      color: var(--white);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -80px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(201,145,61,0.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -100px; left: 10%;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(201,145,61,0.2);
-      border: 1px solid var(--amber);
-      color: var(--amber-light);
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-
-    .badge-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--amber-light);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -1px;
-      max-width: 700px;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 span { color: var(--amber-light); }
-
-    .hero p {
-      font-size: clamp(1rem, 2vw, 1.18rem);
-      color: rgba(255,255,255,0.82);
-      max-width: 580px;
-      margin-bottom: 42px;
-      font-weight: 400;
-    }
-
-    .hero-rings {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .ring-tag {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.9);
-      padding: 8px 18px;
-      border-radius: 50px;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-
-    /* ── SECTION BASE ────────────────────────────── */
-    section { padding: 90px 6%; }
-
-    .section-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--green-mid);
-      margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1.2;
-      color: var(--green-deep);
-      max-width: 600px;
-      margin-bottom: 18px;
-    }
-
-    .section-sub {
-      font-size: 1.05rem;
-      color: var(--gray-text);
-      max-width: 580px;
-      margin-bottom: 56px;
-    }
-
-    /* ── PROBLEM ─────────────────────────────────── */
-    .problem { background: var(--off-white); }
-
-    .problem-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
-
-    .problem-card {
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.07);
-      border-radius: 14px;
-      padding: 28px;
-    }
-
-    .problem-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      background: #fdf0e0;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px;
-      font-size: 1.4rem;
-    }
-
-    .problem-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--green-deep);
-      margin-bottom: 10px;
-    }
-
-    .problem-card p {
-      font-size: 0.9rem;
-      color: var(--gray-text);
-      line-height: 1.65;
-    }
-
-    /* ── HOW IT WORKS ────────────────────────────── */
-    .how { background: var(--white); }
-
-    .rings-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-    }
-
-    .ring-card {
-      border-radius: 16px;
-      padding: 36px 30px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ring-card.farmer  { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border: 1px solid #a5d6a7; }
-    .ring-card.broker  { background: linear-gradient(135deg, #fff8e1, #ffecb3); border: 1px solid #ffe082; }
-    .ring-card.manu    { background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 1px solid #90caf9; }
-
-    .ring-number {
-      font-size: 4rem;
-      font-weight: 900;
-      opacity: 0.12;
-      position: absolute;
-      top: 10px; right: 20px;
-      line-height: 1;
-      color: var(--green-deep);
-    }
-
-    .ring-card h3 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--green-deep);
-      margin-bottom: 14px;
-    }
-
-    .ring-card ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-
-    .ring-card ul li {
-      font-size: 0.9rem;
-      color: #2d4a30;
-      padding-left: 20px;
-      position: relative;
-      line-height: 1.5;
-    }
-
-    .ring-card ul li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--green-mid);
-      font-weight: 700;
-    }
-
-    /* ── VALUE ───────────────────────────────────── */
-    .value { background: var(--green-deep); color: var(--white); }
-
-    .value .section-label { color: var(--amber-light); }
-    .value .section-title { color: var(--white); }
-    .value .section-sub   { color: rgba(255,255,255,0.7); }
-
-    .value-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .value-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 14px;
-      padding: 28px 24px;
-      transition: background 0.2s;
-    }
-
-    .value-card:hover { background: rgba(255,255,255,0.11); }
-
-    .value-card .icon {
-      font-size: 1.8rem;
-      margin-bottom: 14px;
-    }
-
-    .value-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 10px;
-    }
-
-    .value-card p {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.65;
-    }
-
-    /* ── GLOBAL ──────────────────────────────────── */
-    .global { background: var(--off-white); }
-
-    .global-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    @media (max-width: 768px) { .global-inner { grid-template-columns: 1fr; gap: 40px; } }
-
-    .global-regions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .region-tag {
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--green-deep);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .region-tag .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green-light);
-      flex-shrink: 0;
-    }
-
-    /* ── CONTACT ─────────────────────────────────── */
-    .contact { background: var(--white); text-align: center; }
-
-    .contact .section-title,
-    .contact .section-sub { max-width: 540px; margin-left: auto; margin-right: auto; }
-
-    .contact .section-sub { margin-bottom: 40px; }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--green-mid);
-      color: var(--white);
-      padding: 14px 28px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    .btn-primary:hover { background: var(--green-deep); }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      color: var(--green-mid);
-      border: 2px solid var(--green-mid);
-      padding: 14px 28px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-
-    .btn-secondary:hover { background: var(--green-mid); color: var(--white); }
-
-    /* ── FOOTER ──────────────────────────────────── */
-    footer {
-      background: var(--dark);
-      color: rgba(255,255,255,0.5);
-      text-align: center;
-      padding: 32px 6%;
-      font-size: 0.85rem;
-    }
-
-    footer span { color: var(--amber-light); font-weight: 600; }
-
-    /* ── RESPONSIVE ──────────────────────────────── */
-    @media (max-width: 600px) {
-      nav { padding: 14px 5%; }
-      .nav-brand { font-size: 1rem; }
-      .hero { padding: 120px 5% 80px; }
-      section { padding: 70px 5%; }
-    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
   </style>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <nav class="wrap" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="AgriTrace home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V8m0 5c-4 0-7-2.4-7-6 4 0 7 2.4 7 6Zm0-2c4 0 7-2.4 7-6-4 0-7 2.4-7 6Z"/></svg>
+        </span>
+        AgriTrace
+      </a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#pilot" class="nav-pilot">Explore a pilot</a>
+      </div>
+    </nav>
+  </header>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2a9 9 0 0 1 9 9c0 5-9 13-9 13S3 16 3 11a9 9 0 0 1 9-9z"/>
-        <circle cx="12" cy="11" r="3"/>
-      </svg>
-    </div>
-    <span class="nav-brand">AgriTrace</span>
-  </a>
-  <a class="nav-cta" href="https://www.linkedin.com/in/adewole-oyediran" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-      <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-    </svg>
-    Connect on LinkedIn
-  </a>
-</nav>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Verified agrifood sourcing intelligence</p>
+          <h1>Evidence that follows the lot—<span>from origin through processing.</span></h1>
+          <p class="hero-copy">AgriTrace helps agrifood buyers, manufacturers and supply-chain operators connect farm evidence, custody, transformation and commercial records into a buyer-ready chain of evidence.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="mailto:info@agritrace.tech?subject=AgriTrace%20pilot%20enquiry">Explore a pilot <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="#how">See how it works</a>
+          </div>
+        </div>
+        <aside class="hero-note" aria-label="Current product status">
+          <strong>Current status</strong>
+          <p>Technical foundation deployed and live-verified across farm records, recursive lot ancestry, manufacturer processing, evidence packs and self-service commercial workflows.</p>
+          <small>Next gate: validate a buyer-defined evidence pack with a real commercial lot.</small>
+        </aside>
+      </div>
+    </section>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="badge">
-    <span class="badge-dot"></span>
-    Platform in Development — Accepting Expressions of Interest
-  </div>
-  <h1>Know Exactly <span>Where Your Food</span> Comes From</h1>
-  <p>
-    AgriTrace is a global agrifood sourcing intelligence platform. We connect verified farm-level production records with commercial demand; so manufacturers, brokers, and food buyers can source commodities with confidence, transparency, and full traceability.
-  </p>
-  <div class="hero-rings">
-    <span class="ring-tag">🌾 Farmers — All Scales</span>
-    <span class="ring-tag">🔗 Brokers</span>
-    <span class="ring-tag">🏭 Manufacturers & Buyers</span>
-    <span class="ring-tag">🌍 Worldwide</span>
-  </div>
-</section>
+    <div class="audience">
+      <div class="wrap audience-row">
+        <span>Built for</span>
+        <div class="audience-list" aria-label="Primary users">
+          <span>Food manufacturers</span><span>Importers &amp; traders</span><span>Processors</span><span>Cooperatives</span><span>Procurement &amp; compliance teams</span>
+        </div>
+      </div>
+    </div>
 
-<!-- PROBLEM -->
-<section class="problem">
-  <p class="section-label">The Problem We Are Solving</p>
-  <h2 class="section-title">Sourcing decisions are still built on trust, not evidence</h2>
-  <p class="section-sub">European food manufacturers and buyers are under increasing pressure to prove where their commodities come from; but the supply chain cannot yet provide that proof.</p>
-  <div class="problem-grid">
-    <div class="problem-card">
-      <div class="problem-icon">📄</div>
-      <h3>Unverifiable Paper Records</h3>
-      <p>Sourcing decisions rely on documents and verbal assurances that cannot be independently confirmed at any stage of the supply chain.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-icon">🔍</div>
-      <h3>No Farm-Level Visibility</h3>
-      <p>Buyers have no view into how, where, or by whom a commodity was grown; only what an intermediary chooses to report.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-icon">⚖️</div>
-      <h3>Rising Regulatory Pressure</h3>
-      <p>EU Farm to Fork, CSDDD, and the EU Deforestation Regulation all demand traceable, documented sourcing chains that most businesses cannot yet produce.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-icon">🚫</div>
-      <h3>Excluded Producers</h3>
-      <p>Farmers of all sizes — without structured records or market access tools; cannot participate in higher-value, verified commercial supply chains.</p>
-    </div>
-  </div>
-</section>
+    <section class="section" aria-labelledby="problem-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">The sourcing evidence gap</p>
+          <h2 id="problem-title">The physical product moves. Its evidence often breaks apart.</h2>
+          <p class="lead">Origin, quality, custody and processing records live across suppliers, spreadsheets and documents. Buyers are left reconstructing proof after the transaction—when the evidence is hardest to verify.</p>
+        </div>
+        <div class="problem-grid">
+          <article class="card"><div class="card-number">01</div><h3>Origin disappears downstream</h3><p>Farm and plot information is often reduced to a country, region or supplier claim before the commodity reaches a buyer.</p></article>
+          <article class="card"><div class="card-number">02</div><h3>Processing breaks provenance</h3><p>Aggregation, blending and transformation can separate an output lot from the records of its contributing origins.</p></article>
+          <article class="card"><div class="card-number">03</div><h3>Due diligence becomes paperwork</h3><p>Teams spend time collecting documents without a dependable link between the evidence, the physical lot and commercial decisions.</p></article>
+        </div>
+      </div>
+    </section>
 
-<!-- HOW IT WORKS -->
-<section class="how">
-  <p class="section-label">How It Works</p>
-  <h2 class="section-title">Three rings. One verified supply chain.</h2>
-  <p class="section-sub">AgriTrace connects the full supply chain; from the farm to the manufacturer; through a single, auditable, immutable record system.</p>
-  <div class="rings-grid">
-    <div class="ring-card farmer">
-      <div class="ring-number">1</div>
-      <h3>🌾 Farmers — Every Scale</h3>
-      <ul>
-        <li>Register farms and plots with soil and location data</li>
-        <li>Record all inputs: seeds, fertilisers, labour, transport</li>
-        <li>Track crop development and harvest outcomes</li>
-        <li>Log costs, revenue, and profit per farming round</li>
-        <li>Photo records of crop growth stages</li>
-        <li>AI-assisted guidance for pests and crop issues</li>
-      </ul>
-    </div>
-    <div class="ring-card broker">
-      <div class="ring-number">2</div>
-      <h3>🔗 Brokers</h3>
-      <ul>
-        <li>Organise farms into structured farming rounds</li>
-        <li>Aggregate supply from any size of farm operation</li>
-        <li>Match verified supply to manufacturer specifications</li>
-        <li>Manage sourcing commitments with documented evidence</li>
-        <li>Build a track record of supply reliability</li>
-      </ul>
-    </div>
-    <div class="ring-card manu">
-      <div class="ring-number">3</div>
-      <h3>🏭 Manufacturers & Buyers</h3>
-      <ul>
-        <li>Define commodity specifications, quality, and volume</li>
-        <li>Source from verified, documented supply chains</li>
-        <li>Trace commodities to specific farms and plots</li>
-        <li>Access production history, inputs, and yield performance</li>
-        <li>Satisfy regulatory due diligence with auditable records</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <section class="section journey" id="how" aria-labelledby="journey-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">One continuous record</p>
+          <h2 id="journey-title">From production evidence to buyer review</h2>
+          <p class="lead">AgriTrace records the critical events around a commodity lot so downstream teams can review its origin, movement, transformation and exceptions in context.</p>
+        </div>
+        <div class="journey-grid">
+          <article class="step"><div class="step-top"><span class="step-index">01</span><span class="step-dot"></span></div><h3>Origin</h3><p>Participant, farm, plot, production cycle and activity evidence.</p></article>
+          <article class="step"><div class="step-top"><span class="step-index">02</span><span class="step-dot"></span></div><h3>Harvest lot</h3><p>Quantity, quality, contributing origins and source evidence.</p></article>
+          <article class="step"><div class="step-top"><span class="step-index">03</span><span class="step-dot"></span></div><h3>Custody</h3><p>Aggregation, receipt, inventory and commercial attribution.</p></article>
+          <article class="step"><div class="step-top"><span class="step-index">04</span><span class="step-dot"></span></div><h3>Processing</h3><p>Source lots, processing event, output lot and declared yield.</p></article>
+          <article class="step"><div class="step-top"><span class="step-index">05</span><span class="step-dot"></span></div><h3>Buyer evidence</h3><p>Origin trace, compliance context, exceptions and commercial records.</p></article>
+        </div>
+        <p class="journey-note"><strong>Designed for honest evidence:</strong> missing information, unresolved exceptions and unverified quantities are disclosed rather than silently treated as compliant.</p>
+      </div>
+    </section>
 
-<!-- VALUE -->
-<section class="value">
-  <p class="section-label">Why AgriTrace</p>
-  <h2 class="section-title">The trust layer the global food system is missing</h2>
-  <p class="section-sub">Our platform creates an immutable, auditable supply-chain memory; built during production, not reconstructed after the fact.</p>
-  <div class="value-grid">
-    <div class="value-card">
-      <div class="icon">🔐</div>
-      <h3>Immutable Records</h3>
-      <p>Production and sourcing records are stored in an event-driven, tamper-proof system. What was recorded cannot be altered retroactively.</p>
-    </div>
-    <div class="value-card">
-      <div class="icon">📍</div>
-      <h3>Farm-Level Traceability</h3>
-      <p>Every sourcing decision traces back to a specific farmer, plot, season, and production record; not just a country or region.</p>
-    </div>
-    <div class="value-card">
-      <div class="icon">🌍</div>
-      <h3>Global Coverage</h3>
-      <p>Works wherever farms operate. Designed for low-bandwidth, mobile-first environments so no producer is excluded by geography.</p>
-    </div>
-    <div class="value-card">
-      <div class="icon">📋</div>
-      <h3>Regulatory Ready</h3>
-      <p>Auditable supply-chain documentation that helps manufacturers meet CSDDD, EUDR, and Farm to Fork traceability requirements.</p>
-    </div>
-  </div>
-</section>
+    <section class="section lineage" aria-labelledby="lineage-title">
+      <div class="wrap lineage-grid">
+        <div>
+          <p class="eyebrow">Multi-hop traceability</p>
+          <h2 id="lineage-title">Processing should not erase where a product came from.</h2>
+          <p class="lead">AgriTrace follows source-lot relationships recursively, allowing a processed lot to resolve to its contributing farm-level origins through multiple transformation steps.</p>
+        </div>
+        <div class="lineage-panel" aria-label="Example lot lineage">
+          <div class="chain"><div class="node"><b>Farm lots</b><span>Named producers and production evidence</span></div><div class="arrow">→</div><div class="node"><b>Aggregated input</b><span>Lot-linked receipt and custody</span></div></div>
+          <div class="chain"><div class="node"><b>Processed lot</b><span>Sources, operation and declared yield</span></div><div class="arrow">→</div><div class="node"><b>Buyer pack</b><span>Origins, chain and evidence status</span></div></div>
+          <p class="evidence-boundary"><strong>Evidence boundary:</strong> recursive origins and processed-lot draw quantities are implemented. Exact per-origin allocation through blends and full process-specific mass balance remain part of the current hardening roadmap.</p>
+        </div>
+      </div>
+    </section>
 
-<!-- GLOBAL -->
-<section class="global">
-  <div class="global-inner">
-    <div>
-      <p class="section-label">Global Reach</p>
-      <h2 class="section-title">European buyers. Global supply.</h2>
-      <p class="section-sub" style="margin-bottom: 0;">
-        AgriTrace is built to connect European manufacturers and traders to verified producers anywhere in the world; the same traceability infrastructure regardless of country, crop, or farm size. One platform. Every market.
-      </p>
+    <section class="section" id="evidence" aria-labelledby="evidence-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Built, next and bounded</p>
+          <h2 id="evidence-title">Credibility begins with saying exactly what is proven.</h2>
+          <p class="lead">AgriTrace separates implemented capability from the commercial and assurance outcomes that still need to be validated.</p>
+        </div>
+        <div class="proof-grid">
+          <article class="card proof-card"><div><span class="status">Implemented</span><h3>Technical traceability foundation</h3><p>Farm-level production records, inventory lots, recursive processing ancestry, manufacturer compliance packs and tenant-scoped commercial workflows have been deployed and exercised in live technical scenarios.</p></div></article>
+          <article class="card proof-card"><div><span class="status next">Next gate</span><h3>Real buyer proof loop</h3><p>A named buyer reviews a real lot and records whether the evidence is useful, sufficient or requires correction.</p></div></article>
+          <article class="card proof-card"><div><span class="status next">Hardening</span><h3>Quantitative reconciliation</h3><p>Complete allocation, mass-balance tolerances, transformation coverage and correction controls across complex processing.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section roles" aria-labelledby="roles-title">
+      <div class="wrap">
+        <div class="section-head"><p class="eyebrow">Shared evidence, role-specific value</p><h2 id="roles-title">One chain of evidence. Different operational jobs.</h2></div>
+        <div class="roles-grid">
+          <article class="card role-card"><div class="role-icon">B</div><h3>Buyers</h3><p>Review origins, production context, lot history, exceptions and supporting evidence before a sourcing decision.</p></article>
+          <article class="card role-card"><div class="role-icon">M</div><h3>Manufacturers</h3><p>Record processing against legitimately purchased inputs and trace output lots back to contributing origins.</p></article>
+          <article class="card role-card"><div class="role-icon">C</div><h3>Cooperatives &amp; brokers</h3><p>Organise supply, preserve lot attribution, manage inventory and operate customer, pricing and order workflows.</p></article>
+          <article class="card role-card"><div class="role-icon">F</div><h3>Farmers</h3><p>Build a persistent production record that keeps their identity and contribution visible downstream within agreed permissions.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pilot" aria-labelledby="pilot-title">
+      <div class="wrap pilot-box">
+        <div>
+          <p class="eyebrow">Pilot with AgriTrace</p>
+          <h2 id="pilot-title">Define the evidence your sourcing decision actually needs.</h2>
+          <p class="lead">We are seeking a European agrifood buyer, manufacturer or importer and an upstream operating partner for a focused proof chain—preferably cocoa or coffee.</p>
+          <div class="pilot-actions">
+            <a class="button button-primary" href="mailto:info@agritrace.tech?subject=AgriTrace%20buyer%20pilot">Discuss a buyer pilot <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/adewole-oyediran" target="_blank" rel="noopener noreferrer">Connect with the founder</a>
+          </div>
+        </div>
+        <div class="pilot-checks">
+          <div class="pilot-check"><span class="check">✓</span><span>One defined commodity, origin chain and physical flow</span></div>
+          <div class="pilot-check"><span class="check">✓</span><span>Buyer-co-designed evidence requirements and exception rules</span></div>
+          <div class="pilot-check"><span class="check">✓</span><span>At least one observed aggregation or processing step</span></div>
+          <div class="pilot-check"><span class="check">✓</span><span>Recorded buyer acceptance, conditional acceptance or rejection</span></div>
+          <div class="pilot-check"><span class="check">✓</span><span>Measured operating effort and cost per verified lot</span></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="boundary" aria-label="Compliance boundary">
+      <div class="wrap"><span aria-hidden="true">ⓘ</span><p><strong>Compliance boundary.</strong> AgriTrace supports evidence collection, traceability, due-diligence workflow and auditability. It is not a certification body and does not guarantee that a customer or product is legally compliant. Accountable operators and qualified advisers retain responsibility for regulatory decisions.</p></div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V8m0 5c-4 0-7-2.4-7-6 4 0 7 2.4 7 6Zm0-2c4 0 7-2.4 7-6-4 0-7 2.4-7 6Z"/></svg></span>AgriTrace</a><p>Verified sourcing intelligence and multi-hop traceability for agrifood supply chains.</p></div>
+      <div class="footer-links"><a href="mailto:info@agritrace.tech">Email</a><a href="https://www.linkedin.com/in/adewole-oyediran" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="#pilot">Pilot</a></div>
     </div>
-    <div class="global-regions">
-      <div class="region-tag"><span class="dot"></span>Eastern Europe</div>
-      <div class="region-tag"><span class="dot"></span>South America</div>
-      <div class="region-tag"><span class="dot"></span>Southeast Asia</div>
-      <div class="region-tag"><span class="dot"></span>West Africa</div>
-      <div class="region-tag"><span class="dot"></span>North Africa</div>
-      <div class="region-tag"><span class="dot"></span>Central Asia</div>
-      <div class="region-tag"><span class="dot"></span>South Asia</div>
-      <div class="region-tag"><span class="dot"></span>+ Expanding</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact">
-  <p class="section-label">Get in Touch</p>
-  <h2 class="section-title">Looking for a commercial co-founder</h2>
-  <p class="section-sub">
-    AgriTrace is in active development. I am seeking a business or commercial co-founder with agrifood, commodity trading, procurement, or supply-chain experience to shape the commercial strategy and go-to-market approach.
-  </p>
-  <div class="contact-links">
-    <a class="btn-primary" href="https://www.linkedin.com/in/adewole-oyediran" target="_blank" rel="noopener">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-        <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-      </svg>
-      Connect on LinkedIn
-    </a>
-    <a class="btn-secondary" href="mailto:bensha02019@gmail.com">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-        <polyline points="22,6 12,12 2,6"/>
-      </svg>
-      Send an Email
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 <span>AgriTrace</span> &nbsp;·&nbsp; Verified Agrifood Sourcing Intelligence &nbsp;·&nbsp; Platform in Development</p>
-</footer>
-
+  </footer>
 </body>
 </html>
