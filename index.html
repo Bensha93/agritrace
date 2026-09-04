@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AgriTrace | Verified Agrifood Sourcing Intelligence</title>
-  <meta name="description" content="AgriTrace helps agrifood buyers and manufacturers connect farm evidence, custody, processing and commercial records into a buyer-ready chain of evidence.">
+  <title>AgriTrace | Traceable Products. Visible Farmers.</title>
+  <meta name="description" content="AgriTrace connects farm evidence, custody, processing and commercial records so buyers can trace physical lots and farmers can build permissioned business histories.">
   <meta name="theme-color" content="#163d32">
   <meta property="og:title" content="AgriTrace | Evidence that follows the lot">
-  <meta property="og:description" content="Buyer-ready agrifood sourcing evidence from origin through processing and delivery.">
+  <meta property="og:description" content="Buyer-ready sourcing evidence today, trusted farmer business histories over time.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://agritrace.tech/">
   <link rel="canonical" href="https://agritrace.tech/">
@@ -132,6 +132,17 @@
     .role-card { min-height: 230px; }
     .role-icon { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 30px; border-radius: 13px; color: var(--white); background: var(--forest); font: 800 1rem/1 "Manrope", sans-serif; }
 
+    .opportunity { color: var(--white); background: #102e27; }
+    .opportunity .eyebrow { color: var(--gold); }
+    .opportunity .lead { color: rgba(255,255,255,.7); }
+    .opportunity-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 42px; }
+    .opportunity-step { min-height: 230px; padding: 26px; border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); background: rgba(255,255,255,.06); }
+    .opportunity-index { display: inline-block; margin-bottom: 45px; color: var(--gold); font: 800 .78rem/1 "Manrope", sans-serif; letter-spacing: .08em; }
+    .opportunity-step h3 { margin-bottom: 10px; color: var(--white); }
+    .opportunity-step p { color: rgba(255,255,255,.66); font-size: .92rem; }
+    .opportunity-boundary { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; margin-top: 24px; padding: 22px 24px; border-left: 3px solid var(--gold); background: rgba(255,255,255,.05); color: rgba(255,255,255,.68); }
+    .opportunity-boundary strong { color: var(--gold); }
+
     .pilot-box { display: grid; grid-template-columns: 1.15fr .85fr; gap: 50px; padding: 58px; border-radius: 28px; color: var(--white); background: var(--forest); box-shadow: var(--shadow); }
     .pilot-box .eyebrow { color: var(--gold); }
     .pilot-box .lead { margin-top: 20px; color: rgba(255,255,255,.7); }
@@ -158,6 +169,7 @@
       .step { border-bottom: 1px solid var(--line); }
       .problem-grid, .proof-grid { grid-template-columns: 1fr 1fr; }
       .roles-grid { grid-template-columns: 1fr 1fr; }
+      .opportunity-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 700px) {
       .wrap { width: min(calc(100% - 28px), var(--max)); }
@@ -165,7 +177,7 @@
       .nav-links a:not(.nav-pilot) { display: none; }
       .audience-row { padding: 22px 0; align-items: flex-start; flex-direction: column; }
       .audience-list { gap: 11px 18px; }
-      .problem-grid, .proof-grid, .roles-grid, .journey-grid { grid-template-columns: 1fr; }
+      .problem-grid, .proof-grid, .roles-grid, .journey-grid, .opportunity-grid { grid-template-columns: 1fr; }
       .step { min-height: 210px; border-right: 0; }
       .step-top { margin-bottom: 42px; }
       .pilot-box { padding: 36px 26px; }
@@ -185,7 +197,7 @@
       </a>
       <div class="nav-links">
         <a href="#how">How it works</a>
-        <a href="#evidence">Evidence</a>
+        <a href="#opportunity">Farmer opportunity</a>
         <a href="#pilot" class="nav-pilot">Explore a pilot</a>
       </div>
     </nav>
@@ -197,7 +209,7 @@
         <div>
           <p class="eyebrow">Verified agrifood sourcing intelligence</p>
           <h1>Evidence that follows the lot: <span>from origin through processing.</span></h1>
-          <p class="hero-copy">AgriTrace helps agrifood buyers, manufacturers and supply-chain operators connect farm evidence, custody, transformation and commercial records into a buyer-ready chain of evidence.</p>
+          <p class="hero-copy">AgriTrace helps agrifood buyers, manufacturers and supply-chain operators connect farm evidence, custody, transformation and commercial records into a buyer-ready chain of evidence. The same permissioned history can help farmers become more visible as agricultural businesses over time.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="mailto:bensha02019@gmail.com?subject=AgriTrace%20pilot%20enquiry">Explore a pilot <span aria-hidden="true">→</span></a>
             <a class="button button-secondary" href="#how">See how it works</a>
@@ -291,8 +303,25 @@
           <article class="card role-card"><div class="role-icon">B</div><h3>Buyers</h3><p>Review origins, production context, lot history, exceptions and supporting evidence before a sourcing decision.</p></article>
           <article class="card role-card"><div class="role-icon">M</div><h3>Manufacturers</h3><p>Record processing against legitimately purchased inputs and trace output lots back to contributing origins.</p></article>
           <article class="card role-card"><div class="role-icon">C</div><h3>Cooperatives &amp; brokers</h3><p>Organise supply, preserve lot attribution, manage inventory and operate customer, pricing and order workflows.</p></article>
-          <article class="card role-card"><div class="role-icon">F</div><h3>Farmers</h3><p>Build a persistent production record that keeps their identity and contribution visible downstream within agreed permissions.</p></article>
+          <article class="card role-card"><div class="role-icon">F</div><h3>Farmers</h3><p>Build a permissioned production and delivery history that preserves their identity, contribution and commercial activity downstream.</p></article>
         </div>
+      </div>
+    </section>
+
+    <section class="section opportunity" id="opportunity" aria-labelledby="opportunity-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">The longer-term purpose</p>
+          <h2 id="opportunity-title">Traceability is the foundation. Economic opportunity is the destination.</h2>
+          <p class="lead">Many farmers produce real economic value without a durable record of what they grow, deliver and earn. AgriTrace is designed to preserve that history so farmers can be recognised as businesses and, when the evidence is mature, assessed more fairly by accountable institutions.</p>
+        </div>
+        <div class="opportunity-grid">
+          <article class="opportunity-step"><span class="opportunity-index">01</span><h3>Visible</h3><p>Connect farmer identity, plots, activities and harvest evidence with clear permissions.</p></article>
+          <article class="opportunity-step"><span class="opportunity-index">02</span><h3>Commercially connected</h3><p>Link lots, quality, delivery, buyer and settlement records to attributable participation.</p></article>
+          <article class="opportunity-step"><span class="opportunity-index">03</span><h3>Evidence-ready</h3><p>Build a multi-season business history that can be reviewed instead of relying only on informal claims.</p></article>
+          <article class="opportunity-step"><span class="opportunity-index">04</span><h3>Finance-ready</h3><p>Enable banks, insurers and buyer-finance programmes to assess permissioned evidence under their own rules.</p></article>
+        </div>
+        <div class="opportunity-boundary"><span aria-hidden="true">ⓘ</span><p><strong>Our boundary.</strong> AgriTrace does not provide loans, set creditworthiness or guarantee finance. It builds traceable, permissioned evidence. Financial institutions remain responsible for eligibility, affordability and risk decisions.</p></div>
       </div>
     </section>
 
@@ -324,7 +353,7 @@
 
   <footer>
     <div class="wrap footer-grid">
-      <div><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><img src="agritrace-logo.png" alt=""></span>AgriTrace</a><p>Verified sourcing intelligence and multi-hop traceability for agrifood supply chains.</p></div>
+      <div><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><img src="agritrace-logo.png" alt=""></span>AgriTrace</a><p>Traceable products. Visible farmers. Stronger agricultural businesses.</p></div>
       <div class="footer-links"><a href="mailto:bensha02019@gmail.com">Email</a><a href="https://www.linkedin.com/in/adewole-oyediran" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="#pilot">Pilot</a></div>
     </div>
   </footer>
